@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #8fb49a;
+  color: #17181a;
+}
+
+.hero-photo-pattern {
+  background:
+    repeating-linear-gradient(135deg, #26282b 0 2px, transparent 2px 14px),
+    #1e2022;
+}
+
+.work-thumb-pattern {
+  background:
+    repeating-linear-gradient(135deg, #26282b 0 2px, transparent 2px 14px),
+    #1e2022;
+}
+
+@keyframes ping2 {
+
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-ping2 {
+  animation: ping2 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
