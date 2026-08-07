@@ -1,156 +1,108 @@
 export const profile = {
   name: "Shreyash Talele",
-  role: "Full-Stack Developer",
-  tagline:
-    "Building production-grade web applications with React, Next.js & Node.js",
+  role: "Frontend Developer & Software Engineer",
   location: "Pune, Maharashtra, India",
-  email: "your.email@example.com", // 🔁 Replace with your real email
+  email: "your.email@example.com", // TODO: replace with your real email
   linkedin: "https://www.linkedin.com/in/shreyash-talele/",
   github: "https://github.com/shreyashtalele",
-  twitter: "https://twitter.com/yourhandle", // Optional - add if you have
   availability: "Open to opportunities",
-  resumeUrl: "/resume.pdf", // Add your resume PDF to public folder
+  resumeUrl: "/resume.pdf", // TODO: add your resume PDF to /public
 };
 
 export const stats = [
-  { label: "Experience", value: "1+ Year" },
-  { label: "Projects", value: "4" },
-  { label: "CSV Rows Processed", value: "500+" },
-  { label: "Technologies", value: "15+" },
+  { label: "Years experience", value: "1+" },
+  { label: "REST APIs integrated", value: "15+" },
+  { label: "Projects shipped", value: "5" },
+  { label: "Core stack", value: "MERN" },
 ];
 
 export const facts = [
   { label: "Based in", value: "Pune, Maharashtra, IN" },
-  { label: "Experience", value: "1 year internship + projects" },
-  { label: "Focus", value: "Full-stack development, product engineering" },
-  { label: "Education", value: "MCA (8.07 CGPA) | BCS (9.94 CGPA)" },
+  { label: "Experience", value: "Entry-level (1 yr internship)" },
+  { label: "Focus", value: "Frontend development, full-stack" },
+  { label: "Tools", value: "React, Next.js, Node.js, PostgreSQL" },
   { label: "Availability", value: "Open to opportunities" },
 ];
 
-export const projects = [
+export type Project = {
+  id: string;
+  title: string;
+  description: string;
+  tags: string[];
+  category: "Full-Stack" | "Web" | "Mobile";
+  metrics?: string[];
+  demoUrl?: string; // TODO: add if the project has a live demo
+  githubUrl?: string; // TODO: add if the repo is public
+  image?: string; // TODO: add a real screenshot to /public and reference it here
+};
+
+export const projects: Project[] = [
   {
-    id: "shipment-management",
+    id: "shipment-management-system",
     title: "Shipment Management System",
     description:
-      "Production dashboard for logistics teams to manage shipment data through CSV imports with dynamic field mapping, validation, and real-time analytics.",
-    longDescription: [
-      "Built for small-mid cap logistics companies struggling with CSV-based data management",
-      "Implemented end-to-end data pipeline: upload → validation → transformation → analytics",
-      "Designed dynamic field mapping allowing users to match CSV columns to system fields",
-      "Built responsive dashboards with search, filtering, pagination, and analytics visualization",
-      "Collaborated with 2 frontend developers using Git workflows and code reviews",
-    ],
-    metrics: [
-      "500-600 rows processed per CSV import",
-      "2-person frontend team",
-      "15+ REST APIs integrated",
-      "Real-time data validation & transformation",
-    ],
-    tags: ["Next.js", "React.js", "Tailwind CSS", "ShadCN UI", "REST APIs"],
-    image: "/projects/shipment-management.png", // Add screenshot
-    demoUrl: "https://demo-url.com", // Optional
-    githubUrl: "https://github.com/your-repo", // Optional
+      "Full-stack platform for managing shipment operations — auth, dashboard analytics, CSV upload with dynamic field mapping, and 15+ integrated REST APIs.",
+    tags: ["Next.js", "FastAPI", "PostgreSQL"],
     category: "Full-Stack",
-  },
-  {
-    id: "agrolease",
-    title: "Agrolease — Agricultural Rental Platform",
-    description:
-      "Full-stack rental platform connecting farmers with agricultural equipment. Complete user flow from listing to booking with secure authentication.",
-    longDescription: [
-      "Built MERN-based web application for agricultural equipment rental",
-      "Designed REST APIs for authentication, equipment management, and booking workflows",
-      "Implemented MongoDB schema design and CRUD operations",
-      "Integrated frontend and backend for end-to-end functionality",
-    ],
-    metrics: [
-      "Full user flow: listing → booking → payment",
-      "MongoDB with optimized schema design",
-      "JWT-based authentication",
-    ],
-    tags: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-    image: "/projects/agrolease.png",
-    demoUrl: "https://demo-url.com",
-    githubUrl: "https://github.com/your-repo",
-    category: "Full-Stack",
-  },
-  {
-    id: "smart-farming",
-    title: "Smart Farming — Crop & Fertilizer Recommendation",
-    description:
-      "Mobile application delivering ML-driven crop and fertilizer recommendations to farmers through an intuitive interface.",
-    longDescription: [
-      "Built mobile app using React Native for cross-platform compatibility",
-      "Integrated Django REST APIs connecting mobile frontend with ML recommendation engine",
-      "Designed responsive interfaces for data input and results display",
-    ],
-    metrics: [
-      "ML-driven crop recommendations",
-      "Cross-platform mobile app",
-      "Django REST API integration",
-    ],
-    tags: ["React Native", "Django REST Framework", "Machine Learning"],
-    image: "/projects/smart-farming.png",
-    demoUrl: "https://demo-url.com",
-    githubUrl: "https://github.com/your-repo",
-    category: "Mobile",
+    metrics: ["15+ REST APIs", "CSV import + validation"],
   },
   {
     id: "storewise",
-    title: "Storewise — Marketing Website",
+    title: "Storewise — Marketing site",
     description:
-      "Dynamic marketing website with content management through headless CMS, built for performance and responsiveness.",
-    longDescription: [
-      "Built with Next.js for optimal performance and SEO",
-      "Integrated Sanity CMS for dynamic content management",
-      "Responsive design across all devices",
-    ],
-    metrics: ["Headless CMS integration", "SEO optimized", "Fast load times"],
-    tags: ["Next.js", "Sanity CMS", "Tailwind CSS"],
-    image: "/projects/storewise.png",
-    demoUrl: "https://demo-url.com",
-    githubUrl: "https://github.com/your-repo",
-    category: "Frontend",
+      "Informational website with a dynamic content pipeline through a headless CMS, built for responsiveness and fast load times.",
+    tags: ["Next.js", "Sanity CMS", "Tailwind"],
+    category: "Web",
+    metrics: ["Headless CMS", "Fully responsive"],
+  },
+  {
+    id: "smart-farming-application",
+    title: "Smart Farming Application",
+    description:
+      "Mobile app helping farmers get crop recommendations through an ML-based prediction workflow, wrapped in a simple, guided interface.",
+    tags: ["React Native", "Machine Learning"],
+    category: "Mobile",
+    metrics: ["ML-based predictions"],
+  },
+  {
+    id: "agrolease",
+    title: "Agrolease",
+    description:
+      "Agriculture-focused application for managing products and services, with integrated payments and backend operations.",
+    tags: ["PHP", "Razorpay"],
+    category: "Web",
+    metrics: ["Payment gateway integration"],
   },
 ];
 
 export const skillGroups = [
   {
     title: "Frontend",
-    icon: "🎨",
     items: [
       "React.js",
       "Next.js",
       "TypeScript",
-      "Tailwind CSS",
-      "ShadCN UI",
+      "JavaScript",
       "HTML5",
       "CSS3",
+      "Tailwind CSS",
+      "ShadCN UI",
     ],
   },
   {
     title: "Backend",
-    icon: "⚙️",
-    items: [
-      "Node.js",
-      "Express.js",
-      "FastAPI",
-      "REST APIs",
-      "JWT Authentication",
-      "Middleware",
-    ],
+    items: ["Node.js", "Express.js", "FastAPI", "JWT"],
   },
   {
-    title: "Database & Tools",
-    icon: "🗄️",
+    title: "Data & Tools",
     items: [
       "PostgreSQL",
-      "MySQL",
       "MongoDB",
       "Docker",
-      "Git & GitHub",
+      "Git",
+      "GitHub",
       "Postman",
-      "VS Code",
+      "Vercel",
     ],
   },
 ];
@@ -158,43 +110,8 @@ export const skillGroups = [
 export const experience = [
   {
     period: "Jan 2025 — Jan 2026",
-    role: "Software Developer Intern",
-    company: "Simtrak Solutions",
+    role: "Software Development Trainee Intern",
+    company: "Startup (Shipment Management)", // TODO: swap in the real company name
     location: "Remote",
-    achievements: [
-      "Developed full-stack web application modules using React.js, Next.js, and REST APIs",
-      "Integrated 15+ REST APIs for authentication, shipment tracking, analytics, and reporting",
-      "Built dashboard features: search, filtering, pagination, CSV upload, and dynamic field mapping",
-      "Improved data-processing speed and user experience for internal teams",
-      "Collaborated using Git workflows and code reviews with 2-person frontend team",
-    ],
   },
-];
-
-export const education = [
-  {
-    degree: "Master of Computer Applications (MCA)",
-    institution: "DYPIMCAM, Pune",
-    cgpa: "8.07 / 10",
-    period: "2023 — 2025",
-  },
-  {
-    degree: "Bachelor of Computer Science (BCS)",
-    institution: "KBCNUMU, Jalgaon",
-    cgpa: "9.94 / 10",
-    period: "2020 — 2023",
-  },
-];
-
-export const timeline = {
-  period: "2025 — 2026",
-};
-
-// Navigation links for header
-export const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#work", label: "Work" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
 ];

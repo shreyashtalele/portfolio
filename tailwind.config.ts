@@ -37,9 +37,14 @@ const config: Config = {
           },
           "50%": { opacity: ".55", boxShadow: "0 0 0 5px rgba(143,180,154,0)" },
         },
+        ping2: {
+          "0%": { transform: "scale(1)", opacity: "0.75" },
+          "75%, 100%": { transform: "scale(2)", opacity: "0" },
+        },
       },
       animation: {
         pulse2: "pulse2 2.6s ease-in-out infinite",
+        ping2: "ping2 1.6s cubic-bezier(0,0,0.2,1) infinite",
       },
     },
   },
