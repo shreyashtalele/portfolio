@@ -1,10 +1,15 @@
-import { profile } from "./data";
+import { profile } from "@/components/data";
+import Container from "@/components/Container";
 
 export default function Footer() {
+  const year = new Date().getFullYear();
+
   return (
-    <footer>
-      <div className="mx-auto flex max-w-wrap flex-col items-center justify-between gap-4 px-8 py-8 text-sm text-muted sm:flex-row">
-        <span>© 2026 {profile.name}</span>
+    <footer className="border-t border-line">
+      <Container className="flex flex-col items-center justify-between gap-4 py-8 text-sm text-muted sm:flex-row">
+        <span>
+          © {year} {profile.name}
+        </span>
         <div className="flex gap-5">
           <a
             href={profile.github}
@@ -22,8 +27,11 @@ export default function Footer() {
           >
             LinkedIn
           </a>
+          <a href={`mailto:${profile.email}`} className="hover:text-ink">
+            Email
+          </a>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 }

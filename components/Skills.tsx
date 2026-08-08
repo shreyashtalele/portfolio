@@ -1,5 +1,4 @@
 import { skillGroups } from "@/components/data";
-import { skillIconMap } from "@/components/skillIcons";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
 import SkillChip from "@/components/SkillChip";
@@ -18,7 +17,7 @@ export default function Skills() {
             </h3>
             <div className="grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
               {group.items.map((item) => (
-                <SkillChip key={item} name={item} icon={skillIconMap[item]} />
+                <SkillChip key={item} name={item} />
               ))}
             </div>
           </Reveal>
