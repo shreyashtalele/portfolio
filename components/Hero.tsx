@@ -1,5 +1,8 @@
 "use client";
 
+"use client";
+
+import Image from "next/image";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { FiArrowDown, FiFileText } from "react-icons/fi";
 import { profile, stats } from "@/components/data";
@@ -117,10 +120,14 @@ export default function Hero() {
           */}
 
           <div className="relative aspect-[4/5] w-full max-w-[320px] overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5">
-            <div className="flex h-full w-full flex-col items-center justify-center gap-2 text-center font-mono text-xs text-muted">
-              <span>Your photo here</span>
-              <span className="text-[10px]">4:5 ratio recommended</span>
-            </div>
+            <Image
+              src="/photo.jpg"
+              alt={`${profile.name}, ${profile.role}`}
+              fill
+              priority
+              sizes="(max-width: 640px) 100vw, 320px"
+              className="object-cover"
+            />
           </div>
 
           <div className="grid w-full max-w-[320px] grid-cols-2 gap-3 sm:gap-4">

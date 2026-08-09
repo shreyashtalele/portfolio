@@ -2,7 +2,7 @@ export const profile = {
   name: "Shreyash Talele",
   role: "Frontend Developer & Software Engineer",
   location: "Pune, Maharashtra, India",
-  email: "your.email@example.com", // TODO: replace with your real email
+  email: "taleleshreyash44@gmail.com", // TODO: replace with your real email
   linkedin: "https://www.linkedin.com/in/shreyash-talele/",
   github: "https://github.com/shreyashtalele",
   availability: "Open to opportunities",
@@ -24,16 +24,26 @@ export const facts = [
   { label: "Availability", value: "Open to opportunities" },
 ];
 
+export type CaseStudy = {
+  period: string;
+  problem: string;
+  role: string;
+  approach: string[];
+  highlights: { title: string; description: string }[];
+  outcome: string;
+};
+
 export type Project = {
   id: string;
   title: string;
   description: string;
   tags: string[];
-  category: "Full-Stack" | "Web" | "Mobile";
+  category: "Full-Stack" | "Web" | "Mobile" | "Freelance" | "AI / Web";
   metrics?: string[];
-  demoUrl?: string; // TODO: add if the project has a live demo
-  githubUrl?: string; // TODO: add if the repo is public
-  image?: string; // TODO: add a real screenshot to /public and reference it here
+  demoUrl?: string;
+  githubUrl?: string;
+  image?: string;
+  caseStudy?: CaseStudy;
 };
 
 export const projects: Project[] = [
@@ -41,37 +51,49 @@ export const projects: Project[] = [
     id: "shipment-management-system",
     title: "Shipment Management System",
     description:
-      "Full-stack platform for managing shipment operations — auth, dashboard analytics, CSV upload with dynamic field mapping, and 15+ integrated REST APIs.",
+      "Full-stack shipment operations platform with a responsive frontend, authentication, dashboard analytics, CSV upload and validation, dynamic field mapping, and integrated REST APIs.",
     tags: ["Next.js", "FastAPI", "PostgreSQL"],
     category: "Full-Stack",
-    metrics: ["15+ REST APIs", "CSV import + validation"],
+    metrics: [
+      "CSV upload & validation",
+      "Dynamic field mapping",
+      "15+ REST API integrations",
+    ],
   },
   {
-    id: "storewise",
-    title: "Storewise — Marketing site",
+    id: "career-lens",
+    title: "CareerLens",
     description:
-      "Informational website with a dynamic content pipeline through a headless CMS, built for responsiveness and fast load times.",
-    tags: ["Next.js", "Sanity CMS", "Tailwind"],
-    category: "Web",
-    metrics: ["Headless CMS", "Fully responsive"],
-  },
-  {
-    id: "smart-farming-application",
-    title: "Smart Farming Application",
-    description:
-      "Mobile app helping farmers get crop recommendations through an ML-based prediction workflow, wrapped in a simple, guided interface.",
-    tags: ["React Native", "Machine Learning"],
-    category: "Mobile",
-    metrics: ["ML-based predictions"],
+      "AI-powered resume analysis tool that evaluates a candidate's resume against a specific job description, identifies matching and missing skills, analyzes keywords, experience, projects, and structure, and provides ATS scoring with improvement suggestions.",
+    tags: ["Next.js", "AI", "Resume Analysis"],
+    category: "AI / Web",
+    metrics: [
+      "Resume & JD analysis",
+      "ATS score",
+      "AI-powered improvement suggestions",
+    ],
   },
   {
     id: "agrolease",
     title: "Agrolease",
     description:
-      "Agriculture-focused application for managing products and services, with integrated payments and backend operations.",
+      "Agriculture equipment rental platform designed to help users discover and rent farming equipment through a complete web application with integrated payment functionality.",
     tags: ["PHP", "Razorpay"],
     category: "Web",
-    metrics: ["Payment gateway integration"],
+    metrics: ["Equipment rental platform", "Payment gateway integration"],
+  },
+  {
+    id: "astrologer-consultant",
+    title: "Astrologer Consultant Website",
+    description:
+      "Freelance website for an online astrology consultation service, featuring a responsive user interface, structured content sections, reusable components, and a modern frontend experience.",
+    tags: ["Next.js", "React", "Tailwind CSS"],
+    category: "Freelance",
+    metrics: [
+      "Responsive design",
+      "Reusable UI components",
+      "Client freelance project",
+    ],
   },
 ];
 
@@ -111,7 +133,7 @@ export const experience = [
   {
     period: "Jan 2025 — Jan 2026",
     role: "Software Development Trainee Intern",
-    company: "Startup (Shipment Management)", // TODO: swap in the real company name
+    company: "Simtrak Solutions",
     location: "Remote",
   },
 ];

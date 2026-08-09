@@ -1,5 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
+import { profile } from "@/components/data";
+import { SITE_URL } from "@/lib/config";
 import "@/app/globals.css";
 
 const fraunces = Fraunces({
@@ -25,46 +27,32 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://your-domain.com"), // 🔁 Update with your actual domain
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Shreyash Talele — Full-Stack Developer",
     template: "%s | Shreyash Talele",
   },
   description:
     "Full-stack developer specializing in React, Next.js, and Node.js. Built production dashboards handling 500+ row CSV imports with real-time analytics.",
-  keywords: [
-    "Full-Stack Developer",
-    "React Developer",
-    "Next.js Developer",
-    "Node.js",
-    "TypeScript",
-    "MERN Stack",
-    "Software Engineer",
-    "Web Developer",
-    "JavaScript",
-    "Tailwind CSS",
-    "MongoDB",
-    "Express.js",
-  ],
   authors: [{ name: "Shreyash Talele" }],
   creator: "Shreyash Talele",
   publisher: "Shreyash Talele",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
+  formatDetection: { email: false, address: false, telephone: false },
+  icons: {
+    icon: "/favicon.png",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-domain.com", // 🔁 Update with your actual domain
+    url: SITE_URL,
     title: "Shreyash Talele — Full-Stack Developer",
     description:
       "Building full-stack solutions that solve real problems. Explore my work in shipment management, agri-tech, and more.",
     siteName: "Shreyash Talele Portfolio",
     images: [
       {
-        url: "/og-image.png", // 📸 Create this in your public folder
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: "Shreyash Talele - Full-Stack Developer Portfolio",
@@ -89,9 +77,7 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  alternates: {
-    canonical: "https://your-domain.com", // 🔁 Update with your actual domain
-  },
+  alternates: { canonical: SITE_URL },
 };
 
 export const viewport: Viewport = {
@@ -109,18 +95,32 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const personJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: profile.name,
+    url: SITE_URL,
+    jobTitle: profile.role,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: profile.location,
+    },
+    sameAs: [profile.github, profile.linkedin],
+  };
+
   return (
     <html
       lang="en"
       className={`${fraunces.variable} ${inter.variable} ${plexMono.variable}`}
     >
-      {/* 
-         FIX: Removed "scroll-smooth" from the html tag.
-         Why? Native CSS scroll-smooth on the <html> tag can conflict 
-         with your custom smooth scrolling in the Header component. 
-         It is safer to handle scrolling via your JS or Tailwind utility classes.
-      */}
       <body className="bg-bg text-ink font-body text-base leading-relaxed antialiased">
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         {children}
       </body>
     </html>
