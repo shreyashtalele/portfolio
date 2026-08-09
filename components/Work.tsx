@@ -6,6 +6,7 @@ import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import ProjectCard from "@/components/ProjectCard";
+import ProjectModal from "@/components/ProjectModal";
 
 const categories: Array<Project["category"] | "All"> = [
   "All",
@@ -14,9 +15,21 @@ const categories: Array<Project["category"] | "All"> = [
 
 export default function Work() {
   const [filter, setFilter] = useState<(typeof categories)[number]>("All");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredProjects =
     filter === "All" ? projects : projects.filter((p) => p.category === filter);
+
+  const handleProjectClick = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedProject(null), 300);
+  };
 
   return (
     <Section id="work">
@@ -51,7 +64,10 @@ export default function Work() {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {filteredProjects.map((project, index) => (
           <Reveal key={project.id} delayMs={index * 80}>
-            <ProjectCard project={project} />
+            <ProjectCard
+              project={project}
+              onClick={() => handleProjectClick(project)}
+            />
           </Reveal>
         ))}
       </div>
@@ -60,6 +76,15 @@ export default function Work() {
         <p className="py-12 text-center text-muted">
           No projects found for &quot;{filter}&quot;
         </p>
+      )}
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal
+          project={selectedProject}
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+        />
       )}
     </Section>
   );

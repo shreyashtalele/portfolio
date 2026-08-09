@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { profile } from "../components/data";
 import { Menu, X } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { href: "#about", label: "About" },
@@ -58,7 +59,6 @@ export default function Header() {
           }
         });
       },
-      // rootMargin is set to -72px to offset the height of your sticky header
       { threshold: 0.3, rootMargin: "-72px 0px -72px 0px" },
     );
 
@@ -82,8 +82,8 @@ export default function Header() {
     <header
       className={`sticky top-0 z-50 border-b border-line transition-all duration-300 ${
         scrolled
-          ? "bg-bg/95 backdrop-blur-xl shadow-lg shadow-black/5"
-          : "bg-bg/[0.86] backdrop-blur-sm"
+          ? "bg-bg/95 backdrop-blur-xl shadow-lg shadow-black/5 dark:bg-bg/95"
+          : "bg-bg/[0.86] backdrop-blur-sm dark:bg-bg/[0.86]"
       }`}
     >
       <nav className="mx-auto flex h-[72px] max-w-wrap items-center justify-between px-6 sm:px-8">
@@ -116,7 +116,6 @@ export default function Header() {
               }`}
             >
               {link.label}
-              {/* Active indicator dot */}
               {activeSection === link.href.replace("#", "") && (
                 <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[2px] w-4 rounded-full bg-accent" />
               )}
@@ -124,8 +123,10 @@ export default function Header() {
           ))}
         </div>
 
-        {/* Right Side: Mobile Menu Toggle ONLY */}
-        <div className="flex items-center">
+        {/* Right Side: ThemeToggle + Mobile Menu Button */}
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+
           <button
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}

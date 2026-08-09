@@ -9,14 +9,14 @@ import { profile, stats } from "@/components/data";
 import { useTypewriter } from "@/hooks/useTypewriter";
 
 const HEADLINE = "I build clean, reliable, and scalable web applications.";
-
 export default function Hero() {
   const { displayedText, isComplete } = useTypewriter(HEADLINE, 35);
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden py-24"
+      className="relative flex min-h-[calc(100vh-72px)] items-center overflow-hidden pt-4 pb-12 md:pt-6 md:pb-16"
+      style={{ marginTop: 0 }}
     >
       <div className="mx-auto grid w-full max-w-wrap grid-cols-1 gap-14 px-6 sm:px-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-[56px]">
         {/* Left content */}
@@ -33,7 +33,7 @@ export default function Hero() {
             {profile.role}
           </div>
 
-          <h1 className="font-display text-[clamp(36px,5.4vw,68px)] font-normal leading-[1.04] tracking-[-0.01em]">
+          <h1 className="font-display text-[clamp(28px,3.5vw,48px)] font-normal leading-[1.08] tracking-[-0.01em]">
             {displayedText}
             {!isComplete && (
               <span
@@ -134,25 +134,18 @@ export default function Hero() {
             {stats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-xl border border-line/50 bg-surface px-4 py-3 text-center transition-all duration-300 hover:border-accent/20 hover:bg-accent/5"
+                className="rounded-xl border border-line/50 bg-surface dark:bg-surface px-4 py-3 text-center transition-all duration-300 hover:border-accent/20 hover:bg-accent/5"
               >
-                <div className="font-display text-xl font-medium text-ink sm:text-2xl">
+                <div className="font-display text-xl font-medium text-ink dark:text-ink sm:text-2xl">
                   {stat.value}
                 </div>
-                <div className="text-[11px] font-mono text-muted sm:text-xs">
+                <div className="text-[11px] font-mono text-muted dark:text-muted sm:text-xs">
                   {stat.label}
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-1.5 text-muted md:flex">
-        <span className="text-[10px] font-mono uppercase tracking-[0.12em]">
-          Scroll
-        </span>
-        <span className="h-8 w-px bg-gradient-to-b from-muted to-transparent" />
       </div>
     </section>
   );

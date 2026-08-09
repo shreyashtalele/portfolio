@@ -16,7 +16,7 @@ export default function Section({
   return (
     <section
       id={id}
-      className={`py-[88px] ${noBorder ? "" : "border-b border-line"} ${className}`}
+      className={`py-6 md:py-10 ${noBorder ? "" : "border-b border-line"} ${className}`}
     >
       <Container>{children}</Container>
     </section>

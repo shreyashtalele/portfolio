@@ -7,9 +7,10 @@ import { FiGithub, FiExternalLink, FiImage } from "react-icons/fi";
 
 type ProjectCardProps = {
   project: Project;
+  onClick?: () => void;
 };
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, onClick }: ProjectCardProps) {
   const { ref, handleMouseMove } = useSpotlight<HTMLDivElement>();
   const hasLinks = project.demoUrl || project.githubUrl;
 
@@ -17,11 +18,13 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <div
       ref={ref}
       onMouseMove={handleMouseMove}
-      className="group relative overflow-hidden rounded-xl border border-line bg-bg transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5"
+      onClick={onClick}
+      className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-xl border border-line bg-bg transition-all duration-300 hover:-translate-y-1 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5"
     >
       <SpotlightOverlay size={340} />
 
-      <div className="relative h-52 overflow-hidden bg-gradient-to-br from-accent/5 to-line/20">
+      {/* Image Section - Fixed Height */}
+      <div className="relative h-48 flex-shrink-0 overflow-hidden bg-gradient-to-br from-accent/5 to-line/20">
         {project.image ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -48,6 +51,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 aria-label={`Live demo of ${project.title}`}
                 className="rounded-full bg-bg p-3 text-ink transition-all duration-300 hover:scale-110 hover:bg-accent hover:text-bg"
+                onClick={(e) => e.stopPropagation()}
               >
                 <FiExternalLink className="h-5 w-5" />
               </a>
@@ -59,6 +63,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
                 rel="noopener noreferrer"
                 aria-label={`${project.title} repository on GitHub`}
                 className="rounded-full bg-bg p-3 text-ink transition-all duration-300 hover:scale-110 hover:bg-accent hover:text-bg"
+                onClick={(e) => e.stopPropagation()}
               >
                 <FiGithub className="h-5 w-5" />
               </a>
@@ -67,16 +72,21 @@ export default function ProjectCard({ project }: ProjectCardProps) {
         )}
       </div>
 
-      <div className="relative p-6">
-        <h3 className="font-display text-xl font-normal transition-colors duration-300 group-hover:text-accent">
+      {/* Content Section - Flex Column with Equal Height */}
+      <div className="flex flex-1 flex-col p-5">
+        {/* Title */}
+        <h3 className="font-display text-lg font-normal transition-colors duration-300 group-hover:text-accent">
           {project.title}
         </h3>
-        <p className="mt-2.5 text-sm leading-relaxed text-muted">
+
+        {/* Description - Fixed height with line clamp */}
+        <p className="mt-2 text-sm leading-relaxed text-muted line-clamp-2">
           {project.description}
         </p>
 
+        {/* Metrics - Fixed height area */}
         {project.metrics && project.metrics.length > 0 && (
-          <div className="mt-3 flex flex-wrap gap-3">
+          <div className="mt-3 flex min-h-[20px] flex-wrap gap-3">
             {project.metrics.map((metric) => (
               <span
                 key={metric}
@@ -88,15 +98,24 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           </div>
         )}
 
-        <div className="mt-4 flex flex-wrap gap-2">
+        {/* Tags - Fixed height area with flex-wrap */}
+        <div className="mt-3 flex min-h-[28px] flex-wrap gap-1.5">
           {project.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-line px-2.5 py-1 font-mono text-[11px] text-muted transition-colors duration-300 group-hover:border-accent/30 group-hover:text-ink"
+              className="rounded-full border border-line px-2.5 py-1 font-mono text-[10px] text-muted transition-colors duration-300 group-hover:border-accent/30 group-hover:text-ink"
             >
               {tag}
             </span>
           ))}
+        </div>
+
+        {/* Spacer to push "Click to view" to bottom */}
+        <div className="flex-1" />
+
+        {/* Click to view - Always at bottom */}
+        <div className="mt-4 text-[10px] font-mono uppercase tracking-widest text-muted/50 transition-colors duration-300 group-hover:text-accent/80">
+          Click to view case study →
         </div>
       </div>
     </div>

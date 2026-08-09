@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter, IBM_Plex_Mono } from "next/font/google";
 import { profile } from "@/components/data";
 import { SITE_URL } from "@/lib/config";
+import ScrollProgress from "@/components/ScrollProgress";
 import "@/app/globals.css";
 
 const fraunces = Fraunces({
@@ -116,11 +117,11 @@ export default function RootLayout({
       <body className="bg-bg text-ink font-body text-base leading-relaxed antialiased">
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
           }}
         />
+        <ScrollProgress />
         {children}
       </body>
     </html>
