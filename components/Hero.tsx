@@ -114,11 +114,6 @@ export default function Hero() {
 
         {/* Right side: photo + stats */}
         <div className="flex flex-col items-center gap-6">
-          {/*
-            TODO: replace with next/image once you have a real photo:
-            <Image src="/headshot.jpg" alt={profile.name} fill className="object-cover" />
-          */}
-
           <div className="relative aspect-[4/5] w-full max-w-[320px] overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5">
             <Image
               src="/photo.jpg"
@@ -128,22 +123,6 @@ export default function Hero() {
               sizes="(max-width: 640px) 100vw, 320px"
               className="object-cover"
             />
-          </div>
-
-          <div className="grid w-full max-w-[320px] grid-cols-2 gap-3 sm:gap-4">
-            {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="rounded-xl border border-line/50 bg-surface dark:bg-surface px-4 py-3 text-center transition-all duration-300 hover:border-accent/20 hover:bg-accent/5"
-              >
-                <div className="font-display text-xl font-medium text-ink dark:text-ink sm:text-2xl">
-                  {stat.value}
-                </div>
-                <div className="text-[11px] font-mono text-muted dark:text-muted sm:text-xs">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

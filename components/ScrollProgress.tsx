@@ -1,10 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 export default function ScrollProgress() {
   const [progress, setProgress] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const pathname = usePathname();
+
+  // Hide on blog pages
+  const isBlogPage = pathname?.startsWith("/blog");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -12,17 +17,12 @@ export default function ScrollProgress() {
       const docHeight =
         document.documentElement.scrollHeight - window.innerHeight;
 
-      // Calculate progress percentage
       const scrollProgress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       setProgress(scrollProgress);
-
-      // Show progress bar after scrolling 50px
       setIsVisible(scrollTop > 50);
     };
 
-    // Initial check
     handleScroll();
-
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll, { passive: true });
 
@@ -31,6 +31,9 @@ export default function ScrollProgress() {
       window.removeEventListener("resize", handleScroll);
     };
   }, []);
+
+  // Don't render on blog pages
+  if (isBlogPage) return null;
 
   return (
     <div

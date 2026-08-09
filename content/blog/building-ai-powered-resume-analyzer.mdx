@@ -1,0 +1,97 @@
+---
+title: "How I Built an AI-Powered Resume Analyzer (CareerLens)"
+description: "A deep dive into building CareerLens - an AI tool that analyzes resumes against job descriptions and provides ATS scoring."
+date: "2026-08-08"
+tags: ["AI", "Next.js", "Project"]
+author: "Shreyash Talele"
+---
+
+## Introduction
+
+Job applications are stressful. You spend hours customizing your resume, only to wonder if you included the right keywords, if your experience is relevant, or if you will pass the ATS.
+
+These questions inspired me to build CareerLens - an AI-powered resume analysis tool.
+
+---
+
+## The Problem
+
+Job seekers face several challenges: uncertainty about their resume quality, missing important keywords from job descriptions, ATS filtering issues, and the time-consuming manual tailoring process.
+
+CareerLens solves this by analyzing resumes against job descriptions and providing detailed feedback.
+
+---
+
+## Tech Stack
+
+Frontend: Next.js, React, TypeScript, Tailwind CSS
+
+AI/ML: Natural Language Processing
+
+File Handling: PDF parsing
+
+Deployment: Vercel
+
+---
+
+## How It Works
+
+Step 1: Users upload their resume in PDF or DOCX format.
+
+Step 2: Users paste the job description they're applying for.
+
+Step 3: AI analyzes skills, keywords, experience, and structure.
+
+Step 4: Results display with ATS Score, matched skills, missing skills, and improvement suggestions.
+
+---
+
+## Key Features
+
+Resume Parsing: The system extracts text from PDF/DOCX and identifies sections like Experience, Education, and Skills.
+
+Skill Matching: The AI compares resume skills against job description skills and calculates a match percentage.
+
+ATS Scoring: Factors include keyword density, skill matches, experience relevance, format quality, and action verbs used.
+
+---
+
+## Challenges & Solutions
+
+Challenge 1: Parsing different resume formats. Solution: Used multiple parsing libraries to handle PDF, DOCX, and plain text.
+
+Challenge 2: Extracting meaningful skills. Solution: Built a skill database and used NLP to match variations.
+
+Challenge 3: Generating actionable feedback. Solution: Created templates for feedback based on missing skills and experience gaps.
+
+---
+
+## What I Learned
+
+AI Integration is accessible - you don't need to be a machine learning expert. Pre-trained models and APIs make AI accessible to any developer.
+
+User Experience matters - I spent equal time on clean UI, fast loading, clear feedback, and mobile responsiveness.
+
+Edge cases are everywhere - handling unexpected inputs was as important as the core logic.
+
+---
+
+## Result
+
+CareerLens successfully helps users understand their resume's strengths, identify skill gaps, improve ATS scores, and apply with confidence.
+
+---
+
+## Future Improvements
+
+I plan to add cover letter generation, interview preparation questions, job recommendations based on skills, and career path analysis.
+
+---
+
+## Conclusion
+
+Building CareerLens was one of my favorite projects because it solves a real problem. The best projects are the ones that help people.
+
+---
+
+_Try CareerLens or check the code on GitHub._
