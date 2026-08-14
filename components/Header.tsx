@@ -1,22 +1,28 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { profile } from "../components/data";
 import { Menu, X } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#work", label: "Work" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", label: "About", isPage: false },
+  { href: "#work", label: "Work", isPage: false },
+  { href: "#skills", label: "Skills", isPage: false },
+  { href: "#experience", label: "Experience", isPage: false },
+  { href: "/blog", label: "Blog", isPage: true },
+  { href: "#contact", label: "Contact", isPage: false },
 ];
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+
+  const isBlogPage = pathname?.startsWith("/blog");
 
   // Close mobile menu on escape key
   useEffect(() => {
@@ -48,9 +54,14 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Track active section on scroll
+  // Track active section on scroll (only on homepage)
   useEffect(() => {
-    const sections = links.map((link) => link.href.replace("#", ""));
+    if (pathname !== "/") return;
+
+    const sectionIds = links
+      .filter((link) => !link.isPage)
+      .map((link) => link.href.replace("#", ""));
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -62,20 +73,32 @@ export default function Header() {
       { threshold: 0.3, rootMargin: "-72px 0px -72px 0px" },
     );
 
-    sections.forEach((id) => {
+    sectionIds.forEach((id) => {
       const element = document.getElementById(id);
       if (element) observer.observe(element);
     });
 
     return () => observer.disconnect();
-  }, []);
+  }, [pathname]);
 
-  const handleLinkClick = (href: string) => {
+  const handleLinkClick = (href: string, isPage: boolean) => {
     setOpen(false);
+
+    if (isPage) {
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const isActive = (href: string, isPage: boolean) => {
+    if (isPage) {
+      return pathname === href || pathname?.startsWith("/blog/");
+    }
+    return activeSection === href.replace("#", "");
   };
 
   return (
@@ -87,40 +110,57 @@ export default function Header() {
       }`}
     >
       <nav className="mx-auto flex h-[72px] max-w-wrap items-center justify-between px-6 sm:px-8">
-        {/* Logo / Name */}
-        <a
-          href="#hero"
+        {/* Logo / Name - FIXED */}
+        <Link
+          href="/"
           className="font-display text-[19px] font-medium tracking-tight transition-colors duration-300 hover:text-accent"
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             window.scrollTo({ top: 0, behavior: "smooth" });
           }}
         >
           {profile.name}
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex md:items-center md:gap-8">
-          {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick(link.href);
-              }}
-              className={`relative text-sm transition-colors duration-300 hover:text-ink ${
-                activeSection === link.href.replace("#", "")
-                  ? "text-ink font-medium"
-                  : "text-muted"
-              }`}
-            >
-              {link.label}
-              {activeSection === link.href.replace("#", "") && (
-                <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[2px] w-4 rounded-full bg-accent" />
-              )}
-            </a>
-          ))}
+          {links.map((link) =>
+            link.isPage ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`relative text-sm transition-colors duration-300 hover:text-ink ${
+                  isActive(link.href, link.isPage)
+                    ? "text-ink font-medium"
+                    : "text-muted"
+                }`}
+                onClick={() => setOpen(false)}
+              >
+                {link.label}
+                {isActive(link.href, link.isPage) && (
+                  <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[2px] w-4 rounded-full bg-accent" />
+                )}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick(link.href, link.isPage);
+                }}
+                className={`relative text-sm transition-colors duration-300 hover:text-ink ${
+                  isActive(link.href, link.isPage)
+                    ? "text-ink font-medium"
+                    : "text-muted"
+                }`}
+              >
+                {link.label}
+                {isActive(link.href, link.isPage) && (
+                  <span className="absolute -bottom-1 left-0 right-0 mx-auto h-[2px] w-4 rounded-full bg-accent" />
+                )}
+              </a>
+            ),
+          )}
         </div>
 
         {/* Right Side: ThemeToggle + Mobile Menu Button */}
@@ -162,31 +202,54 @@ export default function Header() {
         aria-label="Mobile navigation"
       >
         <div className="flex flex-col gap-6">
-          {links.map((link, index) => (
-            <a
-              key={link.href}
-              href={link.href}
-              onClick={(e) => {
-                e.preventDefault();
-                handleLinkClick(link.href);
-              }}
-              className={`text-lg transition-colors duration-300 ${
-                activeSection === link.href.replace("#", "")
-                  ? "text-ink font-medium"
-                  : "text-muted hover:text-ink"
-              }`}
-              style={{
-                animationDelay: `${index * 50}ms`,
-              }}
-            >
-              <span className="flex items-center gap-3">
-                <span className="text-sm text-accent font-mono">
-                  {(index + 1).toString().padStart(2, "0")}.
+          {links.map((link, index) =>
+            link.isPage ? (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-lg transition-colors duration-300 ${
+                  isActive(link.href, link.isPage)
+                    ? "text-ink font-medium"
+                    : "text-muted hover:text-ink"
+                }`}
+                onClick={() => setOpen(false)}
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                }}
+              >
+                <span className="flex items-center gap-3">
+                  <span className="text-sm text-accent font-mono">
+                    {(index + 1).toString().padStart(2, "0")}.
+                  </span>
+                  {link.label}
                 </span>
-                {link.label}
-              </span>
-            </a>
-          ))}
+              </Link>
+            ) : (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleLinkClick(link.href, link.isPage);
+                }}
+                className={`text-lg transition-colors duration-300 ${
+                  isActive(link.href, link.isPage)
+                    ? "text-ink font-medium"
+                    : "text-muted hover:text-ink"
+                }`}
+                style={{
+                  animationDelay: `${index * 50}ms`,
+                }}
+              >
+                <span className="flex items-center gap-3">
+                  <span className="text-sm text-accent font-mono">
+                    {(index + 1).toString().padStart(2, "0")}.
+                  </span>
+                  {link.label}
+                </span>
+              </a>
+            ),
+          )}
         </div>
       </div>
     </header>
