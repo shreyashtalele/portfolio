@@ -2,15 +2,6 @@
 
 const isDev = process.env.NODE_ENV !== "production";
 
-// A pragmatic starting point, not a maximally locked-down policy. 'unsafe-inline' is
-// needed for: React's inline `style={{}}` attributes (used throughout, e.g. the
-// spotlight glow), the JSON-LD structured-data <script> in layout.tsx, and Next.js's
-// own hydration bootstrap script. 'unsafe-eval' is added ONLY in development — Next's
-// dev server uses eval()-based source maps for Hot Module Reloading, which a strict
-// CSP blocks outright. Production builds don't need or get 'unsafe-eval'. Tightening
-// this further (nonce-based CSP) is a reasonable next step, but is more involved and
-// worth doing as its own pass — test thoroughly in the browser console after any CSP
-// change, since violations fail silently in the UI and only show up as console warnings.
 const securityHeaders = [
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "X-Content-Type-Options", value: "nosniff" },
@@ -30,16 +21,71 @@ const securityHeaders = [
   },
 ];
 
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
+
 const nextConfig = {
   reactStrictMode: true,
+
+  // ✅ IMAGE OPTIMIZATION
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
+    minimumCacheTTL: 60,
+    dangerouslyAllowSVG: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+  },
+
+  // ✅ COMPRESSION
+  compress: true,
+
+  // ✅ POWERED BY HEADER (Remove for security/performance)
+  poweredByHeader: false,
+
+  // ✅ SWC MINIFY (Faster builds)
+  swcMinify: true,
+
   async headers() {
     return [
       {
         source: "/:path*",
         headers: securityHeaders,
       },
+      // ✅ Caching for static assets
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/static/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/images/:path*",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/:path*.{jpg,jpeg,png,webp,avif}",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+      {
+        source: "/:path*.{css,js}",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
     ];
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);

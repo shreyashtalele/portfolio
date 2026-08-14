@@ -1,0 +1,79 @@
+---
+title: "How I Integrated 15+ APIs in One Project"
+description: "Lessons learned from building a shipment management system with 15+ REST API integrations."
+date: "2026-08-04"
+tags: ["API", "Full-Stack", "Integration"]
+author: "Shreyash Talele"
+---
+
+## Introduction
+
+When I was building the Shipment Management System, I had to integrate 15+ REST APIs from different shipping carriers and logistics providers.
+
+It was chaotic. But I learned a lot.
+
+---
+
+## The Challenge
+
+My company needed a unified dashboard to track shipments across 15+ carriers, get real-time status updates, handle rate calculations, and process shipments.
+
+Each API had different authentication methods, different data formats, different rate limits, different error handling, and inconsistent documentation.
+
+---
+
+## My Approach
+
+Step 1: Create a Unified Interface - Instead of treating each API differently, I created a standardized interface for creating shipments, tracking shipments, getting rates, and canceling shipments.
+
+Step 2: Handle Authentication - Different APIs use different auth methods. I created a wrapper for each authentication type.
+
+Step 3: Normalize Data - Each API returns different data structures. I created mappers to normalize everything to a standard format.
+
+---
+
+## Lessons Learned
+
+### 1. API Documentation is Everything
+
+Good documentation saves hours. Bad documentation costs days. I read documentation carefully, tested endpoints before coding, and created my own documentation for the team.
+
+### 2. Error Handling is Critical
+
+APIs fail often and unexpectedly. I implemented comprehensive error handling for rate limits, not found errors, and other common issues.
+
+### 3. Rate Limiting is a Real Problem
+
+One carrier allowed 100 requests per minute. Another allowed 10. I queued requests, implemented exponential backoff, and cached responses when possible.
+
+### 4. Testing is Non-Negotiable
+
+I wrote unit tests for each API wrapper, integration tests for real API calls, and mock tests for edge cases.
+
+### 5. Monitoring Saves Lives
+
+I implemented health checks for each API, alerting for failures, and logging for debugging.
+
+---
+
+## Best Practices
+
+Environment variables kept API keys secure. Retry logic handled transient failures. Timeout handling prevented hanging requests. Request logging helped debug issues quickly. Versioning handled API updates gracefully.
+
+---
+
+## Result
+
+What we achieved: 15+ APIs integrated, unified tracking dashboard, real-time status updates, 99.9% uptime for API calls, and operations team efficiency improved by 60 percent.
+
+Key Metrics: 50,000+ API calls per day, 98.5% success rate, and 320ms average latency.
+
+---
+
+## Conclusion
+
+Integrating multiple APIs is challenging but manageable with the right approach: standardize by creating uniform interfaces, normalize by handling different data formats, handle errors by expecting failures, test thoroughly with both unit and integration tests, and monitor actively to know when things break.
+
+---
+
+_Check out the full project on GitHub._

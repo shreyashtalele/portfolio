@@ -110,13 +110,10 @@ export default function Header() {
       }`}
     >
       <nav className="mx-auto flex h-[72px] max-w-wrap items-center justify-between px-6 sm:px-8">
-        {/* Logo / Name - FIXED */}
+        {/* Logo / Name */}
         <Link
           href="/"
           className="font-display text-[19px] font-medium tracking-tight transition-colors duration-300 hover:text-accent"
-          onClick={() => {
-            window.scrollTo({ top: 0, behavior: "smooth" });
-          }}
         >
           {profile.name}
         </Link>
