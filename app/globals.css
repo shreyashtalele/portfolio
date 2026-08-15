@@ -114,9 +114,6 @@ html:not(.dark) .work-thumb-pattern {
 }
 
 /* ===== TAILWIND OVERRIDES FOR LIGHT MODE ===== */
-/* These ensure Tailwind classes work with CSS variables */
-
-/* Background colors */
 .bg-bg {
   background-color: var(--bg);
 }
@@ -129,7 +126,6 @@ html:not(.dark) .work-thumb-pattern {
   background-color: var(--surface-2);
 }
 
-/* Text colors */
 .text-ink {
   color: var(--ink);
 }
@@ -138,7 +134,6 @@ html:not(.dark) .work-thumb-pattern {
   color: var(--muted);
 }
 
-/* Border colors */
 .border-line {
   border-color: var(--line);
 }
@@ -152,8 +147,8 @@ html:not(.dark) .work-thumb-pattern {
     stroke 0.3s ease;
 }
 
-
-
+/* ===== EXPERIENCE SECTION ===== */
+/* Timeline dot pulse animation */
 .group:hover .timeline-dot {
   animation: pulse-dot 1.5s ease-in-out infinite;
 }
@@ -192,6 +187,7 @@ html:not(.dark) .work-thumb-pattern {
   transform: translateX(4px);
 }
 
+/* ===== TOAST ANIMATION ===== */
 @keyframes slide-up {
   0% {
     transform: translateY(100%);
@@ -206,6 +202,41 @@ html:not(.dark) .work-thumb-pattern {
 
 .animate-slide-up {
   animation: slide-up 0.4s ease-out forwards;
+}
+
+/* ===== SKILLS SECTION ===== */
+/* Smooth transitions for skill chips */
+.skill-chip {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.skill-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(143, 180, 154, 0.08);
+}
+
+/* Icon color change on chip hover */
+.skill-chip:hover svg {
+  color: var(--skill-color, #8FB49A) !important;
+}
+
+/* Light mode overrides for skill chips */
+html:not(.dark) .skill-chip {
+  background-color: #FFFFFF;
+  border-color: #E5E3DC;
+}
+
+html:not(.dark) .skill-chip:hover {
+  background-color: #F8F6F0;
+  border-color: #8FB49A;
+}
+
+html:not(.dark) .skill-chip span {
+  color: #4A4A4A;
+}
+
+html:not(.dark) .skill-chip:hover span {
+  color: #17181A;
 }
 
 /* ===== BLOG CONTENT STYLES ===== */
@@ -373,4 +404,14 @@ html:not(.dark) .blog-content hr {
 
 html:not(.dark) .blog-content a:hover {
   color: #17181A;
+}
+
+/* ===== SKILL CHIP ICON COLOR ON HOVER ===== */
+.group:hover svg {
+  color: var(--skill-color, #8FB49A) !important;
+}
+
+/* Light mode override */
+html:not(.dark) .group:hover svg {
+  color: var(--skill-color, #8FB49A) !important;
 }

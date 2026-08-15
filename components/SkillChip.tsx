@@ -26,6 +26,8 @@ const iconMap: Record<string, IconType | null> = {
   "Next.js": SiNextdotjs,
   TypeScript: SiTypescript,
   JavaScript: SiJavascript,
+  HTML5: SiHtml5,
+  CSS3: SiCss,
   "Node.js": FaNodeJs,
   "Express.js": SiExpress,
   FastAPI: SiFastapi,
@@ -33,13 +35,11 @@ const iconMap: Record<string, IconType | null> = {
   MongoDB: SiMongodb,
   Docker: FaDocker,
   Git: FaGitAlt,
-  "Tailwind CSS": SiTailwindcss,
-  "ShadCN UI": SiShadcnui,
-  HTML5: SiHtml5,
-  CSS3: SiCss,
   GitHub: SiGithub,
   Postman: SiPostman,
   Vercel: SiVercel,
+  "Tailwind CSS": SiTailwindcss,
+  "ShadCN UI": SiShadcnui,
 };
 
 type SkillChipProps = {
@@ -52,32 +52,26 @@ export default function SkillChip({ name }: SkillChipProps) {
   const Icon = iconMap[name] || null;
 
   return (
-    <div className="group flex flex-col items-center gap-2.5 rounded-xl border border-line/60 bg-surface px-3 py-4 text-center transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:bg-accent/5">
-      <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-line/60 bg-bg transition-all duration-300 group-hover:border-accent/30">
-        {Icon ? (
-          <Icon
-            className="h-5 w-5 transition-all duration-300 group-hover:scale-110"
-            style={{
-              color: "#97948A",
-              transition: "color 0.3s ease, transform 0.3s ease",
-            }}
-          />
-        ) : (
-          <span className="font-mono text-[10px] text-muted transition-colors duration-300 group-hover:text-accent">
-            {fallbackLetter}
-          </span>
-        )}
-      </div>
+    <div
+      className="group inline-flex items-center gap-2 rounded-full border border-line/60 bg-surface px-4 py-2 text-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/30 hover:bg-accent/5 hover:shadow-lg hover:shadow-accent/5"
+      style={{ "--skill-color": brandColor } as React.CSSProperties}
+    >
+      {Icon ? (
+        <Icon
+          className="h-4 w-4 transition-all duration-300 group-hover:scale-110"
+          style={{
+            color: "#97948A",
+            transition: "color 0.3s ease, transform 0.3s ease",
+          }}
+        />
+      ) : (
+        <span className="font-mono text-[10px] text-muted transition-colors duration-300 group-hover:text-accent">
+          {fallbackLetter}
+        </span>
+      )}
       <span className="text-xs text-muted transition-colors duration-300 group-hover:text-ink">
         {name}
       </span>
-
-      {/* Add style for icon color on card hover */}
-      <style jsx>{`
-        .group:hover svg {
-          color: ${brandColor} !important;
-        }
-      `}</style>
     </div>
   );
 }

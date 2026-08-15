@@ -1,7 +1,5 @@
 "use client";
 
-"use client";
-
 import Image from "next/image";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
 import { FiArrowDown, FiFileText } from "react-icons/fi";
@@ -44,9 +42,9 @@ export default function Hero() {
           </h1>
 
           <p className="mt-5 max-w-[46ch] text-[17px] leading-relaxed text-muted sm:mt-6">
-            Full-stack developer with 1+ year of internship experience building
-            production-grade web applications. I own features end-to-end — from
-            API design and database schema to responsive UI.
+            Building production-grade web applications through internship and
+            freelance work. I own features end-to-end — from API design and
+            responsive UI to scalable backend solutions.
           </p>
 
           <div className="mt-7 flex w-full flex-wrap gap-3.5 sm:mt-9 sm:w-auto">
@@ -116,7 +114,7 @@ export default function Hero() {
         <div className="flex flex-col items-center gap-6">
           <div className="relative aspect-[4/5] w-full max-w-[320px] overflow-hidden rounded-2xl border border-line bg-surface transition-all duration-300 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5">
             <Image
-              src="/photo.jpg"
+              src="/photo.webp"
               alt={`${profile.name}, ${profile.role}`}
               fill
               priority

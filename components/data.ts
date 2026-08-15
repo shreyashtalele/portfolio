@@ -42,12 +42,11 @@ export const stats = [
 
 export const facts = [
   { label: "Based in", value: "Pune, Maharashtra, IN" },
-  { label: "Experience", value: "Entry-level (1 yr internship)" },
+  { label: "Experience", value: "Internship & Freelance" },
   { label: "Focus", value: "Frontend development, full-stack" },
-  { label: "Tools", value: "React, Next.js, Node.js, PostgreSQL" },
+  { label: "Tech Stack", value: "React, Next.js, Node.js, PostgreSQL" },
   { label: "Availability", value: "Open to opportunities" },
 ];
-
 export const techColors: Record<string, string> = {
   "React.js": "#61DAFB",
   "Next.js": "#000000",
@@ -212,37 +211,40 @@ export const projects: Project[] = [
     },
   },
   {
-    id: "agrolease",
-    title: "Agrolease",
+    id: "smart-farming",
+    title: "Smart Farming",
     description:
-      "Agriculture equipment rental platform designed to help users discover and rent farming equipment through a complete web application with integrated payment functionality.",
-    tags: ["PHP", "Razorpay"],
+      "Precision agriculture platform that leverages AI/ML to help farmers optimize crop production. Features include crop recommendation based on soil quality and climate, and fertilizer optimization for better yields.",
+    tags: ["React.js", "Django", "AI/ML", "MySQL"],
     category: "Web",
-    metrics: ["Equipment rental platform", "Payment gateway integration"],
+    metrics: [
+      "ML-based crop recommendation",
+      "Fertilizer optimization",
+      "Data-driven farming insights",
+    ],
     demoUrl: "#",
-    githubUrl: "https://github.com/shreyashtalele/Agrolease",
+    githubUrl: "https://github.com/shreyashtalele/smart-farming-app-backend",
     caseStudy: {
       problem:
-        "Farmers in rural areas struggle to access expensive farming equipment. Buying equipment is cost-prohibitive, and the rental market is fragmented and unorganized.",
+        "Farmers struggle to make informed decisions about which crops to plant and how much fertilizer to use, leading to reduced yields and wasted resources.",
       solution:
-        "Built a complete equipment rental platform that connects equipment owners with farmers. The platform features equipment listing, search, booking, and integrated Razorpay payment gateway for secure transactions.",
+        "Built a precision agriculture platform that uses machine learning to provide data-driven recommendations for crop selection and fertilizer optimization.",
       approach: [
-        "Built backend with PHP for business logic and data management",
-        "Integrated Razorpay for secure payment processing",
-        "Developed a responsive web interface for easy access",
-        "Implemented search and filtering for equipment discovery",
-        "Created user profiles and booking management system",
+        "Developed a Django backend with REST APIs for data processing",
+        "Implemented ML algorithms (GaussianNB, Naive Bayes, Logistic Regression) for predictions",
+        "Built a React.js frontend for easy data input and recommendations",
+        "Integrated soil and climate data for accurate recommendations",
       ],
-      techStack: ["PHP", "Razorpay", "MySQL", "HTML/CSS", "JavaScript"],
+      techStack: ["React.js", "Django", "MySQL", "Scikit-learn", "AI/ML"],
       challenges: [
-        "Ensuring secure payment processing with Razorpay",
-        "Building a scalable architecture for multiple users",
-        "Creating an intuitive booking and rental system",
+        "Collecting and cleaning agricultural data",
+        "Ensuring ML model accuracy with limited data",
+        "Making the system easy to use for farmers",
       ],
       outcomes: [
-        "Connected 50+ equipment owners with farmers",
-        "Processed 200+ rental transactions",
-        "Reduced equipment acquisition costs for farmers by 40%",
+        "Helped farmers make data-driven decisions",
+        "Improved crop yield predictions",
+        "Reduced fertilizer wastage",
       ],
     },
   },
@@ -295,13 +297,13 @@ export const experience: Experience[] = [
     company: "Simtrak Solutions",
     location: "Remote",
     description:
-      "Built a full-stack shipment management platform and contributed to multiple production-grade applications.",
+      "Frontend developer responsible for building responsive UIs and integrating REST APIs for a logistics platform. Worked across the full development lifecycle — from UI implementation to API integration.",
     achievements: [
-      "Developed a Shipment Management System with Next.js, FastAPI, and PostgreSQL",
-      "Implemented CSV upload with validation for 500+ row imports",
-      "Integrated 15+ REST APIs for real-time shipment tracking",
-      "Built role-based authentication and dashboard analytics",
-      "Reduced manual data entry errors by 80%",
+      "Built responsive frontend interfaces using Next.js, React, and Tailwind CSS",
+      "Integrated 15+ REST APIs for real-time shipment tracking and data synchronization",
+      "Implemented CSV upload with validation and dynamic field mapping",
+      "Built role-based authentication with JWT and dashboard analytics",
+      "Reduced manual data entry errors by 80% through automation",
     ],
     tech: ["Next.js", "FastAPI", "PostgreSQL", "Tailwind CSS", "JWT"],
   },

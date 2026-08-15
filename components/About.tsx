@@ -9,16 +9,15 @@ export default function About() {
       <div className="grid grid-cols-1 gap-14 md:grid-cols-[1.3fr_1fr] md:gap-[56px]">
         <div>
           <p className="max-w-[60ch] text-base text-muted">
-            I&apos;m a software developer based in Pune, working across frontend
-            engineering and full-stack web development. I like turning designs
-            into fast, responsive interfaces, and I&apos;m just as comfortable
-            wiring up the REST API and database behind them.
+            Software engineer based in Pune, building clean, performant web
+            applications. I specialize in React, Next.js, and full-stack
+            development — turning complex problems into intuitive,
+            production-ready solutions.
           </p>
           <p className="mt-4 max-w-[60ch] text-base text-muted">
-            I completed a Software Development Trainee internship building a
-            Shipment Management System with Next.js, FastAPI, and PostgreSQL.
-            These days I&apos;m sharpening my TypeScript, backend architecture,
-            and DSA fundamentals to build scalable, production-ready software.
+            I've built production applications using modern frameworks and
+            technologies. I'm currently deepening my expertise in TypeScript,
+            system architecture, and building scalable, high-impact solutions.
           </p>
         </div>
         <div className="flex flex-col border-t border-line">

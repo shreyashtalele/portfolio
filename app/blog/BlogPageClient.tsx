@@ -1,28 +1,17 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import type { BlogPost } from "@/lib/blog";
+import Link from "next/link";
+import { FiArrowLeft } from "react-icons/fi";
 import BlogCard from "@/components/BlogCard";
 import Section from "@/components/Section";
 import SectionHeading from "@/components/SectionHeading";
-import { FiArrowLeft } from "react-icons/fi";
 
 type BlogPageClientProps = {
   posts: BlogPost[];
-  tags: string[];
 };
 
-export default function BlogPageClient({
-  posts: allPosts,
-  tags: allTags,
-}: BlogPageClientProps) {
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
-
-  const posts = selectedTag
-    ? allPosts.filter((post) => post.tags.includes(selectedTag))
-    : allPosts;
-
+export default function BlogPageClient({ posts }: BlogPageClientProps) {
   return (
     <Section id="blog">
       {/* Back to Portfolio Button */}
@@ -40,33 +29,6 @@ export default function BlogPageClient({
         subtitle="Writing about web development, React, Next.js, and more"
       />
 
-      {/* Tags Filter */}
-      <div className="mb-8 flex flex-wrap gap-2">
-        <button
-          onClick={() => setSelectedTag(null)}
-          className={`rounded-full px-4 py-1.5 font-mono text-xs transition-all duration-300 ${
-            selectedTag === null
-              ? "bg-ink text-bg"
-              : "border border-line text-muted hover:border-ink hover:text-ink"
-          }`}
-        >
-          All
-        </button>
-        {allTags.map((tag) => (
-          <button
-            key={tag}
-            onClick={() => setSelectedTag(tag)}
-            className={`rounded-full px-4 py-1.5 font-mono text-xs transition-all duration-300 ${
-              selectedTag === tag
-                ? "bg-ink text-bg"
-                : "border border-line text-muted hover:border-ink hover:text-ink"
-            }`}
-          >
-            {tag}
-          </button>
-        ))}
-      </div>
-
       {/* Post Count */}
       <p className="mb-4 text-sm text-muted">
         {posts.length} {posts.length === 1 ? "post" : "posts"}
@@ -75,8 +37,8 @@ export default function BlogPageClient({
       {/* Blog Posts Grid */}
       {posts.length === 0 ? (
         <div className="py-12 text-center text-muted">
-          <p className="text-lg">No posts found for "{selectedTag}"</p>
-          <p className="text-sm">Try selecting a different tag</p>
+          <p className="text-lg">No blog posts yet.</p>
+          <p className="text-sm">Stay tuned for upcoming content!</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
