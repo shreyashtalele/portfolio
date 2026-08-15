@@ -1,4 +1,4 @@
-import { getAllPosts, getAllTags } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
 import { SITE_URL } from "@/lib/config";
 import BlogPageClient from "./BlogPageClient";
 
@@ -13,7 +13,6 @@ export const metadata = {
 
 export default function BlogPage() {
   const posts = getAllPosts();
-  const tags = getAllTags();
 
-  return <BlogPageClient posts={posts} tags={tags} />;
+  return <BlogPageClient posts={posts} />;
 }
